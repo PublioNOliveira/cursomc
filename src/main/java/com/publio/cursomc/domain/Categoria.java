@@ -1,7 +1,6 @@
 package com.publio.cursomc.domain;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Categoria implements Serializable{
@@ -27,7 +24,7 @@ public class Categoria implements Serializable{
 //Tem que fazer isso no lado que a pessoa quer que venha os objetos referenciados
 // Por exemplo: refenciar categoria trazendo todos os produtos dela, sem isso entraria num loop
 // Ficaria trazendo produtos, categorias, produtos, categorias num loop;
-	@JsonManagedReference
+//	@JsonManagedReference
 	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
 	
