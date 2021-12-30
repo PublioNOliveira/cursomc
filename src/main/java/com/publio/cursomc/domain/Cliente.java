@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +27,18 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	//Faz o banco de dados garantir que não irá ter repetição nesse campo
+	@Column(unique=true)
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
 //	private TipoCliente tipo;
 	
 //	@JsonManagedReference
-	@OneToMany(mappedBy="cliente")
+	// cascade=CascadeType.ALL serve para fazer o comportamento em cascata, 
+	//por exemplo: Se apagar o cliente vai apagar os endereços dele automaticamente
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos =  new ArrayList<>();
 	
 	// Set é um conjunto que não aceita repetição.
@@ -53,7 +60,7 @@ public class Cliente implements Serializable{
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {

@@ -33,6 +33,10 @@ public class ItemPedido implements Serializable{
 		this.preco = preco;
 	}
 	
+	public double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+	
 	//Tudo que começa com Get ele entende que tem que serializar, por isso deve-se ignorar
 	@JsonIgnore
 	public Pedido getPedido() {

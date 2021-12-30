@@ -20,8 +20,8 @@ public class PedidoResource {
 	
 	// O @PathVariable serve para fazer com que o spring saiba que o id da url value="/{id}" vai ter que ir para o id do atributo Integer id
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Pedido obj = service.buscar(id);
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) {
+		Pedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
